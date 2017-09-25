@@ -1,32 +1,19 @@
+package com.bridgeit.Programs;
 import java.util.Scanner;
-
+import com.bridgeit.Utility.*;
 public class VendingMachine 
 {
 
 	public static void main(String[] args) 
 	{	
+		Utility u = new Utility();
 		Scanner s = new Scanner(System.in);
 		int notes[] = {1,2,5,10,50,100,500,1000};
+		System.out.println("Enter the amount:");
 		int change = s.nextInt();
 		int len = notes.length;
-		find(notes,change,len);
-	}
-	static void find(int notes[],int change,int len)
-	{
-		int count=0;
-		// Traverse through all denomination
-		for (int i=len-1; i>=0; i--)
-		{
-		  // Find denominations
-			while(change >= notes[i])
-			{
-				change -= notes[i];
-				System.out.print(notes[i]+" ");
-				count++;
-			}
-		}
-		System.out.println();
+		int count = u.findCount(notes,change,len);
 		System.out.println("Number of notes to be returns : " +count );
+		s.close();
 	}
-
 }

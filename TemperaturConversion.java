@@ -1,23 +1,18 @@
+package com.bridgeit.Programs;
 import java.util.*;
 public class TemperaturConversion 
 {
 	public static void main (String[] args) 
 	{
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter the choice:");
-		temperaturConversion();
-		scan.close();
-	}
-	public static void temperaturConversion()
-	{
+		double c,f;
 		while(true)
-		{	
-			double c,f;
-			Scanner scan = new Scanner(System.in);
+		{
+			System.out.println("Enter the choice:");
 			System.out.println("1: Celsius to Fahrenheit.");
 			System.out.println("2: Fahrenheit to Celsius.");
 			System.out.println("press any key for exit.");
-			int choice = scan.nextInt(); 
+			int choice = scan.nextInt();
 			switch (choice) 
 			{			
 			    case 1: // convert Celsius to Fahrenheit
@@ -36,6 +31,7 @@ public class TemperaturConversion
 			    default :
 			    	return;
 			}
+			scan.close();
 		}
-	}   
+	} 
 }

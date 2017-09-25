@@ -1,9 +1,11 @@
+package com.bridgeit.Programs;
 import java.util.Scanner;
-
-public class BubbleSort {
-
+import com.bridgeit.Utility.*;
+public class BubbleSort 
+{
 	public static void main(String[] args) 
 	{	// 
+		Utility u = new Utility();
 		Scanner s = new Scanner(System.in);
     	System.out.println("Enter the array size");
     	int n = s.nextInt();
@@ -20,37 +22,10 @@ public class BubbleSort {
     	}
     	System.out.println();   
         // sort function
-    	sort(arr);
+    	u.bubbleSortInt(arr);
         System.out.println("After sort:");
         // print array
-        printArray(arr);
+        u.printArray(arr);
         s.close();
 	}
-	/*Function to sort array using bubble sort*/
-	public static void sort(int arr[])
-	{
-		int n = arr.length;
-		for (int i=0 ; i<n ; i++)
-		{
-			for (int j=i+1 ; j<n ; j++)
-			{
-				if(arr[i]>arr[j])
-				{
-					int temp = arr[j];
-					arr[j] = arr[i];
-					arr[i] = temp;
-				}
-			}
-		}
-	}
-	/* A utility function to print array of size n*/
-	public static void printArray(int arr[])
-	{
-		for (int i=0 ; i<arr.length ; i++)
-		{
-			System.out.print(arr[i]+" ");
-		}
-		System.out.println();
-	}
-
 }
