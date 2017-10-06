@@ -31,7 +31,6 @@ public class TemperaturConversion
 			    default :
 			    	return;
 			}
-			scan.close();
 		}
 	} 
 }

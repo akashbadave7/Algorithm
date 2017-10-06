@@ -8,21 +8,18 @@ class InsertionSort
     	Utility u = new Utility();
     	Scanner s = new Scanner(System.in);
     	System.out.println("Enter the array size");
-    	int n = s.nextInt();
-    	int arr[] = new int [n];
+    	Integer n = s.nextInt();
+    	Integer arr[] = new Integer [n];
     	System.out.println("Enter the array element");
     	for (int i=0;i<arr.length;i++)
     	{
     		arr[i] = s.nextInt();
     	}
     	System.out.println("Before sort:");
-    	for (int i=0;i<arr.length;i++)
-    	{
-    		System.out.print(arr[i]+" ");
-    	}
+    	u.printArray(arr);
     	System.out.println();   
         // sort function
-    	u.insertionSortInt(arr);
+    	u.insertionSort(arr);
         System.out.println("After sort:");
         // print array
         u.printArray(arr);

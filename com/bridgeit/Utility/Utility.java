@@ -7,22 +7,28 @@ import java.util.Scanner;
 public class Utility 
 {
 	//SORTING logics
-	//Binary Search Interger
-	public void binarySearchInt(int arr [], int key)
+	/**
+	 * @param arr
+	 * @param key
+	 * @author Akash
+	 * Binary Search Interger/String
+	 */
+	public <T extends Comparable<T>>void binarySearch(T arr[] , T key)
     {
        int low,high,mid;
   	   low=0;
   	   high=arr.length-1;
-  	   
+  	   boolean flag = false;
   	   while(low<=high)
   	   {
   		   mid=(high+low)/2;
-  		   if(key == arr[mid])
+  		   if(key.compareTo(arr [mid])==0)
   		   {
   			 System.out.println("Number "+key+" Found at position "+(mid+1));
-  		     break;
+  		     flag = true;
+  			 break;
   		   }
-  		   else if (key > arr[mid])
+  		   else if (key.compareTo(arr[mid])>0)
   		   {
   			   low = mid+1;
   		   }
@@ -31,44 +37,29 @@ public class Utility
   			   high = mid-1;
   		   }
   	   }
-    }
-	//Binary Search String
-	public void binarySearchStr(String arr[], String str)
-    {
-		boolean found=false;
-		int pos=0;
-		for (int i=0;i<arr.length;i++)
-		{
-			if(str.equalsIgnoreCase((arr[i])))
-			{
-				found=true;
-				pos = i+1;
-				break;
-			}
-		}
-		if(found == true)
-		{
-			System.out.println("Word is found at position "+pos);
-		}
-		else
-		{
-			System.out.println("Word not found");
-		}
-	  
+  	   if(flag == false)
+  	   {
+  		   System.out.println("Not Found");
+  	   }
     }
 	
-	//Insertion Sort Integer
-	public void insertionSortInt(int arr[])
+	
+	/**
+	 * @param arr
+	 * @author Akash
+	 * Insertion Sort Integer/String
+	 */
+	public <T extends Comparable<T>> void insertionSort(T arr[])
 	{
 		int n = arr.length;
         for (int i=1; i<n; ++i)
         {
-            int key = arr[i];
+            T key = arr[i];
             int j = i-1;
  
             /* Move elements of arr that are greater than key, to one position ahead
                of their current position */
-            while (j>=0 && arr[j] > key)
+            while (j>=0 && arr[j].compareTo(key)>0)
             {
                 arr[j+1] = arr[j];
                 j = j-1;
@@ -77,78 +68,65 @@ public class Utility
         }
 	}
 	
-	////Insertion Sort String
-	public void insertionSortStr(String str[])
-	 {
-		 for(int i=1;i<str.length;i++)
-			{
-			    String val=str[i];
-			    int j=i-1;		
-			    while(j>=0 && (str[j].compareTo(val))>0)
-			    {
-		                str[j+1]=str[j];
-			            j--;
-			    }
-			    str[j+1]=val;
-			}
-	 }
 	
-	//BubbleSort Ineteger
-	public void bubbleSortInt(int arr[])
+	
+	/**
+	 * @param arr
+	 * @author Akash
+	 * BubbleSort Ineteger/String
+	 */
+	public <T extends Comparable<T>> void bubbleSort(T arr[])
 	{
 		int n = arr.length;
 		for (int i=0 ; i<n ; i++)
 		{
 			for (int j=i+1 ; j<n ; j++)
 			{
-				if(arr[i]>arr[j])
+				if(arr[i].compareTo(arr[j])>0)
 				{
-					int temp = arr[j];
+					T temp = (T) arr[j];
 					arr[j] = arr[i];
-					arr[i] = temp;
+					arr[i] = (T) temp;
 				}
 			}
 		}
-	}
-	//BubbleSort string
-	public static void bubbleSortStr(String str[])
-	{
-		int n = str.length;
-		for (int i=0 ; i<n ; i++)
-		{
-			for (int j=i+1 ; j<n ; j++)
-			{
-				if(str[i].compareTo(str[j])>0)
-				{
-					String temp = str[j];
-					str[j] = str[i];
-					str[i] = temp;
-				}
-			}
-		}
-	}
+	}	
 	
-	//Merger Sort Integer
 	
-	public void merge_sort (int a[] , int lo , int hi )
+	/**
+	 * @param a
+	 * @param low
+	 * @param high
+	 * @author Akash
+	 * Merger Sort Integer
+	 */
+	public <T extends Comparable<T>> void mergeSort (T a[] , int low , int high )
 	{
-		if( lo < hi ) 
+		if( low < high ) 
 	    {
 			// defines the current array in 2 parts .	  
-			int mid = (lo + hi ) / 2;
+			int mid = (low + high ) / 2;
 			// sort the 1st part of array .
-			merge_sort (a,lo,mid);
+			mergeSort (a,low,mid);
 			 // sort the 2nd part of array.
-	        merge_sort (a,mid+1,hi);             
+	        mergeSort (a,mid+1,high);             
 	        // merge the both parts by comparing elements of both the parts.
-	        merge(a,lo,mid,hi);   
+	        merge(a,low,mid,high);   
 	   }                    
 	}
-	public void merge(int a[] , int start, int mid, int end) 
+	
+	/**
+	 * @param a
+	 * @param start
+	 * @param mid
+	 * @param end
+	 * @author Akash
+	 */
+	public <T extends Comparable<T>> void merge(T a[] , int start, int mid, int end) 
 	{
 		 //stores the starting position of both parts in temporary variables.
 		int p = start ,q = mid+1;
-		int arr1[] = new int[end-start+1];
+		Object[] arr1 = new Object[end-start+1];
 		int k=0;
 		for(int i = start ;i <= end ;i++) 
 		{
@@ -163,7 +141,7 @@ public class Utility
 			   arr1[k++] = a[p++];
 			}
 			//checks which part has smaller element.
-			else if( a[p]<a[q])     
+			else if( a[p].compareTo(a[q])<0)     
 			{
 			   arr1[ k++ ] = a[p++];
 			}
@@ -174,20 +152,31 @@ public class Utility
 		}
 		for (int l=0 ; l< k ;l ++)
 		{
-			  a[start++] = arr1[ l ] ;                          
+			  a[start++] = (T) arr1[ l ] ;                          
 		}
 	}
-	// TO print array
-	public void printArray(int arr[])
+	
+	/**
+	 * @param array
+	 * @author Akash
+	 * TO print array
+	 */
+	public <T extends Comparable<T>> void printArray(T[] array)
 	{
-		for (int i=0 ; i<arr.length ; i++)
+		for (int i=0 ; i<array.length ; i++)
 		{
-			System.out.print(arr[i]+" ");
+			System.out.print(array[i]+" ");
 		}
 		System.out.println();
 	}
 	
 	//ANAGRAM
+	/**
+	 * @param str1
+	 * @param str2
+	 * @author Akash
+	 * ANAGRAM
+	 */
 	public void findAnagram(String str1, String str2) 
 	{
 		int len1 = str1.length();
@@ -234,6 +223,12 @@ public class Utility
 	
 	//Binary
 	
+	/**
+	 * @param str
+	 * @param num
+	 * @author Akash
+	 * convert to binary
+	 */
 	public void toBinary(String str, int num)
 	{
 		int pow = 1;
@@ -258,7 +253,13 @@ public class Utility
 		System.out.println("Binary form is: " +str);
 		swap(str);
 	}
+	
 	// to swap nibbles
+	/**
+	 * @param str
+	 * @author Akash
+	 * to swap nibbles
+	 */
 	static void swap(String str)
 	{
 		if(str.length()<8)
@@ -306,11 +307,16 @@ public class Utility
 	}
 	
 	//BINARYSEARCHSTRING
-	
 
+	/**
+	 * @throws FileNotFoundException
+	 * @author Akash
+	 * BINARYSEARCHSTRING
+	 * reading from file
+	 */
 	public void readFile() throws FileNotFoundException 
 	{
-		File file = new File("D:/Akash/Algorithm/com/bridgeit/Programs/BinarySearchString");
+		File file = new File("/home/bridgeit/Akash/Algorithm/com/bridgeit/Programs/BinarySearchString");
 		if(file.exists())
 		{
 			if(file.canRead())
@@ -353,6 +359,11 @@ public class Utility
 		}
 	}
 
+	/**
+	 * @param arr
+	 * @author Akash
+	 * find word from file
+	 */
 	public static void findWord(String[] arr) 
 	{
 		System.out.println();
@@ -381,6 +392,14 @@ public class Utility
 	}
 	
 	//DAYOFTHEWEEK
+	/**
+	 * @param m
+	 * @param d
+	 * @param y
+	 * @author Akash
+	 * DAYOFTHEWEEK
+	 * @return day of the week
+	 */
 	public int dayOfWeek(int m,int d,int y)
 	{
 		System.out.println("Entered date is : " +m+"/"+d+"/"+y);
@@ -392,26 +411,48 @@ public class Utility
 	}
 	
 	//FInd number
-	// to guess number using binary search
-    public int search(int guess,int low, int high) {
-
-    	if ((high - low) == 1) return low;
+	
+	/**
+	 * @param low
+	 * @param high
+	 * @author akash
+	 * @author Akash
+	 * guess your number
+	 */
+	public static void search(int low, int high) 
+    {
+    	Scanner scan = new Scanner(System.in);
+    	
+    	//if ((high - low) == 1) return low;
         int mid = low + (high - low) / 2;
-        System.out.print("Is it less than "+mid+"? ");
-        boolean ans = false;
-        if (guess<mid) 
+        if(low<high)
         {
-        	System.out.println(!ans);
-        	return search(guess,low, mid);
+	        System.out.println("Is your number in between " + low +" "+ (mid) );
+	        System.out.println("Press y for yes or n for no");
+			if(scan.next().charAt(0)=='y')
+			{
+				search(low,mid);
+			}
+			else
+			{
+				search(mid+1,high);
+			}
         }
         else
         {
-        	System.out.println(ans);
-        	return search(guess,mid, high);
-       	}
+        	System.out.println("The number is "+low);
+        }
     }
     
-    ///Monthly Payment
+    //Monthly Payment
+    
+    /**
+     * @param p
+     * @param y
+     * @param r
+     * @author Akash
+     * Monthly Payment
+     */
     public void monthlyPayment(double p,double y,double r)
 	{
 		double  n = 12*y;
@@ -422,13 +463,19 @@ public class Utility
     
     //PrimeAnagram
     
-    public void disp(int start, int limit)
+    /**
+     * @param start
+     * @param limit
+     * PrimeAnagram
+     * @author Akash
+     * @return  prime numbers
+     */
+    public Integer[] disp(int start, int limit)
 	{
-		Scanner s = new Scanner(System.in);
-		int arr[] = new int[limit/2]; 
+		Integer arr[] = new Integer[limit/2]; 
 		int k=0,len = 0;
 		// find prime number between range 
-		for (int i=start;i<=limit;i++)
+		for (int i=2;i<=limit;i++)
 		{
 			boolean prime = true;
 			for(int j=2;j<i;j++)
@@ -448,53 +495,38 @@ public class Utility
 
         for (int i=0; i<arr.length; i++)
         {
-            if (arr[i] != 0)
+            if (arr[i] != null)
                 len++;
         }
         // to store prime number in array
-        int [] newArray = new int[len];
+        Integer [] newArray = new Integer[len];
         for (int i=0, j=0; i<arr.length; i++)
         {
-            if (arr[i] != 0) {
+            if (arr[i] != null) {
                 newArray[j] = arr[i];
                 j++;
             }
         }
         System.out.println();
         //to print prime numbers
-        for(int i=0;i<newArray.length;i++)
-		{
-				System.out.print(newArray[i]+ " ");
-		}
-        System.out.println();
+        return (newArray);
+       
         //to find palindrom and anagram
-        System.out.println("Anagram and palindrome prime numbers are:");
-        for(int i=0;i<newArray.length;i++)
-        {
-        	int num = newArray[i];
-        	int temp = num;
-        	int sum=0;
-        	while (temp!=0)
-        	{
-        		int rem = temp%10;
-        		sum = (sum*10)+rem;
-        		temp = temp/10;
-        	}
-        	if (num == sum)
-        	{
-        		System.out.print(num+" ");
-        	}
-        }
 	}
     
     //FindPrimeNumber
+    /**
+     * @param start
+     * @param limit
+     * @author Akash
+     */
     public void finfPrimeNum(int start, int limit) 
 	{
 		// TODO Auto-generated method stub
-		int arr[] = new int[limit/2]; 
+		Integer arr[] = new Integer[limit/2]; 
 		int k=0,len = 0;
 		// loop until last number
-		for (int i=start;i<=limit;i++)
+		for (int i=2;i<=limit;i++)
 		{
 			boolean prime = true;
 			// to check the number is prime or not
@@ -515,26 +547,31 @@ public class Utility
 		}
 	    for (int i=0; i<arr.length; i++)
 	    {
-	        if (arr[i] != 0)
+	        if (arr[i] != null)
 	            len++;
 	    }
 	    
-	    int [] newArray = new int[len];
+	    Integer [] newArray = new Integer[len];
 	    for (int i=0, j=0; i<arr.length; i++)
 	    {
-	        if (arr[i] != 0) {
+	        if (arr[i] != null) {
 	            newArray[j] = arr[i];
 	            j++;
 	        }
 	    }
 	    System.out.println();
-	    for(int i=0;i<newArray.length;i++)
-		{
-				System.out.print(newArray[i]+ " ");
-		}
+	   
+	    printArray(newArray);
 	}
     
     //Sqrt
+	/**
+	 * @param c
+	 * @param t
+	 * @param e
+	 * @author Akash
+	 * @return square root of number
+	 */
 	public double sqrt(double c, double t, double e)
 	{
 		while(Math.abs(t-c/t)>e*t)
@@ -570,6 +607,13 @@ public class Utility
 		}
 		
 		//Vending Machine
+		/**
+		 * @param notes
+		 * @param change
+		 * @param len
+		 * @author Akash
+		 * @return numbers of notes to be return
+		 */
 		public int findCount(int notes[],int change,int len)
 		{
 			int count=0;
@@ -586,5 +630,42 @@ public class Utility
 			}
 			System.out.println();
 			return count;
+		}
+		
+		//TASK OPTIMIZATION
+
+		//	orders tasks in ascending order of deadline 
+		/**
+		 * @param deadlineArray
+		 * @param timeArray
+		 * @author Akash
+		 */
+		public void insertionSortAsc(int[] deadlineArray, int[] timeArray) 
+		{
+			for(int i = 1; i < deadlineArray.length; i++) {
+				int deadlineKey = deadlineArray[i];
+				int timeKey = timeArray[i];
+				int j = i - 1;
+				while((j > -1) && (deadlineArray[j] > deadlineKey)) {				
+					deadlineArray[j+1] = deadlineArray[j];
+					timeArray[j+1] = timeArray[j];
+					j--;
+				}
+				deadlineArray[j+1] = deadlineKey;
+				timeArray[j+1] = timeKey;
+			}
+		}
+			
+		/**
+		 * @param count
+		 * @param timeArray
+		 * @author Akash
+		 */
+		public void doTask(int count, int[] timeArray) 
+		{
+			for(int i = 0; i < count; i++) 
+			{
+				System.out.println("Task " + (i+1) + ":" + timeArray[i]);
+			}
 		}
 }
